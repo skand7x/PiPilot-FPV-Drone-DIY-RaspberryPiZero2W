@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Drone Controller</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #fff;
+            touch-action: none;
+            -webkit-user-select: none;
+            user-select: none;
+            overflow: hidden;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+        
+        header {
+            padding: 10px;
+            background-color: #333;
+            text-align: center;
+            border-bottom: 1px solid #444;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .status {
+            padding: 5px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .controls {
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+            overflow: hidden;
+        }
+        
+        .joystick-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .joystick-label {
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #ccc;
+        }
+        
+        .joystick {
+            width: 150px;
+            height: 150px;
+            background-color: #333;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #444;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .stick {
+            width: 50px;
+            height: 50px;
+            background-color: #007bff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #222;
+        }
+        
+        .button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+        
+        .btn-start {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .btn-select {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .btn-a {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .btn-b {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .btn-x {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .btn-y {
+            background-color: #ffc107;
+            color: black;
+        }
+        
+        .button.pressed {
+            transform: scale(0.9);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .telemetry {
+            padding: 10px;
+            font-size: 12px;
+            background-color: #333;
+            color: #ccc;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Drone Controller</h1>
+            <div class="status" id="connection-status">Status: Connecting...</div>
+        </header>
+        
+        <div class="controls">
+            <div class="joystick-container">
+                <div class="joystick-label">Left Stick (Throttle/Yaw)</div>
+                <div class="joystick" id="left-joystick">
+                    <div class="stick" id="left-stick"></div>
+                </div>
+            </div>
+            
+            <div class="joystick-container">
+                <div class="joystick-label">Right Stick (Roll/Pitch)</div>
+                <div class="joystick" id="right-joystick">
+                    <div class="stick" id="right-stick"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <div class="button btn-start" id="btn-start">START</div>
+            <div class="button btn-select" id="btn-select">BACK</div>
+            <div class="button btn-a" id="btn-a">A</div>
+            <div class="button btn-b" id="btn-b">B</div>
+        </div>
+        
+        <div class="telemetry" id="telemetry">
+            Left: (0.00, 0.00) Right: (0.00, 0.00)
+        </div>
+    </div>
+    
+    <script src="/controller.js"></script>
+</body>
+</html> 
